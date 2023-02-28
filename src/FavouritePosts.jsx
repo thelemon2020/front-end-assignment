@@ -1,13 +1,41 @@
+//
+// FILE : FavouritePosts.jsx
+// PROJECT : SENG3080 - Front End Assignment
+// PROGRAMMER : Chris Lemon
+// FIRST VERSION : 2023-02-19
+// LAST REVISION : 2020-09-27
+// DESCRIPTION : The component that handles displaying all posts that have been favourited
+//
+
 import {Table, ActionIcon, Loader, Anchor, Title} from "@mantine/core";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {IconHeartFilled} from "@tabler/icons-react";
-
+//
+// CLASS : FavouritePosts
+// DESCRIPTION : The FavouritePosts Component
+//
 export default function FavouritePosts({activeTab, redditIds}) {
     const [tableRows, setTableRows] = useState([]);
     const [redditData, setRedditData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    //
+    // FILE : removePostFromFavourites
+    // DESCRIPTION : Removes the desired post from the favourites list
+    // PARAMS: id - the id of the post to remove
+    // Returns: Nothing
+    //
+    function removePostFromFavourites(id) {
+        setRedditData((prevState) => prevState.filter((post) => post.id !== id));
+        const filteredArray = localStorage.getItem('reddit_ids')?.split(',').filter((redditId) => redditId !== id) ?? [];
+        if (filteredArray.length > 0) {
+            localStorage.setItem('reddit_ids', filteredArray.toString());
+        }
+        else{
+            localStorage.removeItem('reddit_ids');
+        }
+    }
 
     useEffect(() => {
         setIsLoading(true);
@@ -37,16 +65,6 @@ export default function FavouritePosts({activeTab, redditIds}) {
         }
     }, [activeTab])
 
-    function removePostFromFavourites(id) {
-        setRedditData((prevState) => prevState.filter((post) => post.id !== id));
-        const filteredArray = localStorage.getItem('reddit_ids')?.split(',').filter((redditId) => redditId !== id) ?? [];
-        if (filteredArray.length > 0) {
-            localStorage.setItem('reddit_ids', filteredArray.toString());
-        }
-        else{
-            localStorage.removeItem('reddit_ids');
-        }
-    }
 
     useEffect(() => {
         setTableRows(redditData.map((data) => {
