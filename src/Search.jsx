@@ -78,7 +78,7 @@ export default function Search({activeTab}) {
                 <td style={{textAlign: 'left'}}>{result.data.title}</td>
                 <td style={{textAlign: 'left'}}>{result.data.author}</td>
                 <td style={{textAlign: 'left'}}><Anchor component="a"
-                                                        href={`https://reddit.com/${result.data.permalink}`}>Link</Anchor>
+                                                        href={`https://reddit.com${result.data.permalink}`}>Link</Anchor>
                 </td>
                 <td><ActionIcon
                     onClick={isFavourited ? () => removePostFromFavourites(result.data.id) : () => addPostToFavourites(result.data.id)}>{isFavourited ?

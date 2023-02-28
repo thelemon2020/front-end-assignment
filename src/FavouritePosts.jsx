@@ -71,7 +71,7 @@ export default function FavouritePosts({activeTab, redditIds}) {
                 <td style={{textAlign: 'left'}}>{data.title}</td>
                 <td style={{textAlign: 'left'}}>{data.author}</td>
                 <td style={{textAlign: 'left'}}><Anchor component="a"
-                                                        href={`https://reddit.com/${data.link}`}>Link</Anchor></td>
+                                                        href={`https://reddit.com${data.link}`}>Link</Anchor></td>
                 <td><ActionIcon
                     onClick={() => removePostFromFavourites(data.id)}>
                     <IconHeartFilled/> </ActionIcon></td>
@@ -102,7 +102,7 @@ export default function FavouritePosts({activeTab, redditIds}) {
                 </tr>
                 </thead>
                 <tbody>{tableRows}</tbody>
-            </Table> : <Title order={4}>Nothing Saved</Title>}
+            </Table> : <Center><Title order={4}>Nothing Saved</Title></Center>}
     </>);
 
 }
