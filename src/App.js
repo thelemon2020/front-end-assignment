@@ -7,7 +7,6 @@
 // DESCRIPTION : The main React component that contains the various aspects of the project
 //
 
-import './App.css';
 import {AppShell, Tabs} from "@mantine/core";
 import {useState} from "react";
 import Search from "./Search";

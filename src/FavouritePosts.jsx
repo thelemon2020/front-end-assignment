@@ -7,7 +7,7 @@
 // DESCRIPTION : The component that handles displaying all posts that have been favourited
 //
 
-import {Table, ActionIcon, Loader, Anchor, Title} from "@mantine/core";
+import {Table, ActionIcon, Loader, Anchor, Title, Text, Center, Stack} from "@mantine/core";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {IconHeartFilled} from "@tabler/icons-react";
@@ -31,8 +31,7 @@ export default function FavouritePosts({activeTab, redditIds}) {
         const filteredArray = localStorage.getItem('reddit_ids')?.split(',').filter((redditId) => redditId !== id) ?? [];
         if (filteredArray.length > 0) {
             localStorage.setItem('reddit_ids', filteredArray.toString());
-        }
-        else{
+        } else {
             localStorage.removeItem('reddit_ids');
         }
     }
@@ -58,8 +57,7 @@ export default function FavouritePosts({activeTab, redditIds}) {
             redditIds?.map(async (id) => {
                 await getData(id, counter)
             })
-        }
-        else{
+        } else {
             setTableRows([]);
             setRedditData([]);
         }
@@ -72,19 +70,27 @@ export default function FavouritePosts({activeTab, redditIds}) {
                 <td>{data.score}</td>
                 <td style={{textAlign: 'left'}}>{data.title}</td>
                 <td style={{textAlign: 'left'}}>{data.author}</td>
-                <td style={{textAlign: 'left'}}><Anchor component="a" href={`https://reddit.com/${data.link}`}>Link</Anchor></td>
+                <td style={{textAlign: 'left'}}><Anchor component="a"
+                                                        href={`https://reddit.com/${data.link}`}>Link</Anchor></td>
                 <td><ActionIcon
                     onClick={() => removePostFromFavourites(data.id)}>
                     <IconHeartFilled/> </ActionIcon></td>
             </tr>)
         }))
-        if (redditData.length === redditIds.length){
+        if (redditData.length === redditIds.length) {
             setIsLoading(false);
         }
     }, [redditData]);
 
     return (<>
-        { redditIds?.length > 0 ? isLoading ? <Loader/> :
+        {redditIds?.length > 0 ? isLoading ? <Center>
+                <Stack>
+                    <Text>Loading Your Favourite Posts</Text>
+                    <Center>
+                        <Loader/>
+                    </Center>
+                </Stack>
+            </Center> :
             <Table>
                 <thead>
                 <tr>

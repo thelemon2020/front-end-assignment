@@ -7,7 +7,7 @@
 // DESCRIPTION : The component that handles searching for posts via subreddit
 //
 
-import {Button, Group, Stack, TextInput, Title, Table, ActionIcon, Anchor} from "@mantine/core";
+import {Button, Group, Stack, TextInput, Title, Table, ActionIcon, Anchor, Text, Center} from "@mantine/core";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {IconHeart, IconHeartFilled} from "@tabler/icons-react";
@@ -46,8 +46,7 @@ export default function Search({activeTab}) {
         const filteredArray = localStorage.getItem('reddit_ids')?.split(',').filter((redditId) => redditId !== id)
         if (filteredArray.length > 0) {
             localStorage.setItem('reddit_ids', filteredArray.toString());
-        }
-        else{
+        } else {
             localStorage.removeItem('reddit_ids');
         }
     }
@@ -97,7 +96,9 @@ export default function Search({activeTab}) {
                 <Button onClick={getRedditPosts}>Submit</Button>
             </Group>
         </Stack>
-        <Title order={5}>Results</Title>
+        <Center>
+            <Title order={5}>Results</Title>
+        </Center>
         {tableRows.length > 0 ?
             <Table>
                 <thead>
@@ -110,7 +111,7 @@ export default function Search({activeTab}) {
                 </tr>
                 </thead>
                 <tbody>{tableRows}</tbody>
-            </Table> : 'No Results'}
+            </Table> : <Center><Text>No Results</Text></Center>}
     </>);
 
 }
