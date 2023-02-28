@@ -2,6 +2,7 @@
   "name": "front-end-assignment",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://thelemon2020.github.io/front-end-assignment/",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@mantine/core": "^5.10.4",
